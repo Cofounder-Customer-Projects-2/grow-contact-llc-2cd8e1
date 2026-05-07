@@ -1,4 +1,5 @@
-import { layout, prepare } from "@chenglou/pretext";
+// @chenglou/pretext responsive text — stubbed in SPA build.
+export const responsiveText = null;
 
 export const DEFAULT_RESPONSIVE_TEXT_FONT_FAMILY =
   'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
@@ -8,42 +9,16 @@ export interface ResponsiveTextMetrics {
   lineCount: number;
 }
 
-interface PrepareResponsiveTextOptions {
-  fontFamily?: string;
-  fontSizePx: number;
-  fontWeight?: number | string;
-  letterSpacingPx?: number;
-  lineHeightPx: number;
-  whiteSpace?: "normal" | "pre-wrap";
-}
-
 export function prepareResponsiveText(
-  text: string,
-  {
-    fontFamily = DEFAULT_RESPONSIVE_TEXT_FONT_FAMILY,
-    fontSizePx,
-    fontWeight = 400,
-    letterSpacingPx = 0,
-    lineHeightPx,
-    whiteSpace = "normal",
-  }: PrepareResponsiveTextOptions,
+  _text: string,
+  _opts: {
+    fontFamily?: string;
+    fontSizePx: number;
+    fontWeight?: number | string;
+    letterSpacingPx?: number;
+    lineHeightPx: number;
+    whiteSpace?: "normal" | "pre-wrap";
+  }
 ): (maxWidthPx: number) => ResponsiveTextMetrics {
-  const prepared = prepare(text, `${fontWeight} ${fontSizePx}px ${fontFamily}`, {
-    letterSpacing: letterSpacingPx,
-    whiteSpace,
-  });
-
-  return (maxWidthPx: number) => {
-    if (maxWidthPx <= 0 || text.length === 0) {
-      return { heightPx: lineHeightPx, lineCount: 1 };
-    }
-
-    const result = layout(prepared, maxWidthPx, lineHeightPx);
-    const lineCount = Math.max(result.lineCount, 1);
-
-    return {
-      heightPx: Math.max(result.height, lineHeightPx),
-      lineCount,
-    };
-  };
+  return (_maxWidthPx: number) => ({ heightPx: 24, lineCount: 1 });
 }

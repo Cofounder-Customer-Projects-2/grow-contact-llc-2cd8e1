@@ -1,11 +1,3 @@
-import { createBrowserClient } from "@supabase/ssr";
-import { getSupabaseEnv } from "./env";
-
-export function createClient() {
-  const { supabaseUrl, supabaseAnonKey } = getSupabaseEnv();
-
-  return createBrowserClient(
-    supabaseUrl,
-    supabaseAnonKey,
-  );
-}
+// Thin re-export of the browser Supabase client for the SPA build.
+// The @supabase/ssr server client is not available here.
+export { supabase as createBrowserClient } from "@/integrations/supabase/client";
