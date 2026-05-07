@@ -372,7 +372,11 @@ function LiveInterviewPage() {
   async function onFinalize() {
     setBusy("finalize");
     try {
-      const r = await callServer(finalizeScorecard) as { scorecard: ScorecardRow };
+      const { data: { session: s } } = await supabase.auth.getSession();
+      const r = await finalizeScorecard({
+        data: { sessionId: id },
+        headers: s?.access_token ? { Authorization: `Bearer ${s.access_token}` } : undefined,
+      }) as { scorecard: ScorecardRow };
       setScorecard(r.scorecard);
       toast.success("Scorecard generated");
       // Fire-and-forget: email the interviewer a recap.

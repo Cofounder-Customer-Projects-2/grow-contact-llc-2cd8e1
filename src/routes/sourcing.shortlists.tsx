@@ -53,8 +53,8 @@ function ShortlistsPage() {
     if (!activeId) return;
     (async () => {
       try {
-        const res = await getShortlist({ data: { shortlistId: activeId } });
-        setMembers(res.members as Member[]);
+        const res = await getShortlist({ data: { shortlistId: activeId } }) as { sourcing_shortlist_members: Member[] };
+        setMembers(res.sourcing_shortlist_members as Member[]);
       } catch (e) {
         toast.error(e instanceof Error ? e.message : "Failed");
       }
