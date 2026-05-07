@@ -1,7 +1,4 @@
-export { getPostmarkClient } from "./client";
-export { sendTemplatedEmail } from "./send";
-export type {
-  SendTemplatedEmailArgs,
-  StarterTemplateAlias,
-  TemplateModels,
-} from "./send";
+// Server-only postmark index — not available in SPA build.
+export const getPostmarkClient = (): never => {
+  throw new Error("postmark is not available in SPA mode");
+};

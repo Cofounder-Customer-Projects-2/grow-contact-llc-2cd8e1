@@ -1,8 +1,2 @@
-const postcssConfig = {
-  plugins: {
-    "@tailwindcss/postcss": {},
-    autoprefixer: {},
-  },
-};
-
-export default postcssConfig;
+// PostCSS config — tailwind handled by @tailwindcss/vite plugin in vite.config.ts
+export default {};
