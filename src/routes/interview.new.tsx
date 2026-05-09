@@ -31,6 +31,7 @@ function NewInterviewPage() {
   const [submitting, setSubmitting] = useState(false);
   const [rubrics, setRubrics] = useState<{ id: string; name: string; is_default: boolean }[]>([]);
   const [rubricId, setRubricId] = useState<string>("");
+  const [candidates, setCandidates] = useState<{ id: string; name: string; headline: string | null }[]>([]);
 
   useEffect(() => {
     if (!authLoading && !user) navigate({ to: "/login" });
@@ -39,14 +40,22 @@ function NewInterviewPage() {
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const { data } = await supabase
-        .from("interview_rubrics")
-        .select("id, name, is_default")
-        .order("created_at", { ascending: false });
-      const list = (data ?? []) as { id: string; name: string; is_default: boolean }[];
-      setRubrics(list);
-      const def = list.find((r) => r.is_default);
+      const [{ data: rubricData }, { data: candData }] = await Promise.all([
+        supabase
+          .from("interview_rubrics")
+          .select("id, name, is_default")
+          .order("created_at", { ascending: false }),
+        supabase
+          .from("sourcing_candidates")
+          .select("id, name, headline")
+          .order("created_at", { ascending: false })
+          .limit(200),
+      ]);
+      const rubricList = (rubricData ?? []) as { id: string; name: string; is_default: boolean }[];
+      setRubrics(rubricList);
+      const def = rubricList.find((r) => r.is_default);
       if (def) setRubricId(def.id);
+      setCandidates((candData ?? []) as { id: string; name: string; headline: string | null }[]);
     })();
   }, [user]);
 
@@ -95,6 +104,30 @@ function NewInterviewPage() {
         </p>
 
         <form onSubmit={onSubmit} className="mt-10 space-y-6 rounded-xl border bg-card p-6">
+          {candidates.length > 0 && (
+            <div className="grid gap-2">
+              <Label htmlFor="candidate-select">Pick from sourcing candidates</Label>
+              <select
+                id="candidate-select"
+                className="h-10 rounded-md border bg-background px-3 text-sm"
+                defaultValue=""
+                onChange={(e) => {
+                  const picked = candidates.find((c) => c.id === e.target.value);
+                  if (picked) {
+                    setCandidateName(picked.name);
+                    if (picked.headline && !roleTitle) setRoleTitle(picked.headline);
+                  }
+                }}
+              >
+                <option value="">— or type manually below —</option>
+                {candidates.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}{c.headline ? ` · ${c.headline}` : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
           <div className="grid gap-2">
             <Label htmlFor="candidate">Candidate name</Label>
             <Input
