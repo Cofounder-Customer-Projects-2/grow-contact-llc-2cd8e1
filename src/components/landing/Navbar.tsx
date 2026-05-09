@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, X, LogOut, User as UserIcon, Shield, Video, Inbox } from "lucide-react";
+import { Menu, X, LogOut, User as UserIcon, Shield, Video, Inbox, Users, Send, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -73,7 +73,7 @@ export function Navbar() {
     <>
       <nav
         aria-label="Primary"
-        className="relative z-20 flex w-full flex-row items-center justify-between px-6 py-5 md:px-8"
+        className="relative z-20 flex w-full flex-row items-center justify-between px-4 py-5 md:px-6"
       >
         <Link to="/" className="flex items-center gap-2" aria-label="Grow home">
           <img
@@ -88,12 +88,12 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-0.5 md:flex">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="rounded-md px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-white/5 hover:text-foreground"
+              className="rounded-md px-2.5 py-2 text-sm text-foreground/80 transition-colors hover:bg-white/5 hover:text-foreground"
               activeProps={{ className: "text-foreground bg-white/5" }}
             >
               {l.label}
@@ -151,6 +151,24 @@ export function Navbar() {
                   <Link to="/inbox" className="cursor-pointer">
                     <Inbox className="mr-2 h-4 w-4" />
                     Inbox
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/candidates" className="cursor-pointer">
+                    <Users className="mr-2 h-4 w-4" />
+                    Candidates
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/outreach" className="cursor-pointer">
+                    <Send className="mr-2 h-4 w-4" />
+                    Outreach
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/settings" className="cursor-pointer">
+                    <Settings className="mr-2 h-4 w-4" />
+                    Settings
                   </Link>
                 </DropdownMenuItem>
                 {profile?.isAdmin ? (
