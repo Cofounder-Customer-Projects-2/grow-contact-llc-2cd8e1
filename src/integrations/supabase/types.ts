@@ -14,6 +14,68 @@ export type Database = {
   }
   public: {
     Tables: {
+      email_threads: {
+        Row: {
+          id: string
+          user_id: string | null
+          candidate_id: string | null
+          subject: string
+          from_email: string
+          from_name: string | null
+          to_email: string
+          body_text: string | null
+          body_html: string | null
+          message_id: string | null
+          in_reply_to: string | null
+          thread_id: string | null
+          direction: string
+          sent_at: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          candidate_id?: string | null
+          subject: string
+          from_email: string
+          from_name?: string | null
+          to_email: string
+          body_text?: string | null
+          body_html?: string | null
+          message_id?: string | null
+          in_reply_to?: string | null
+          thread_id?: string | null
+          direction: string
+          sent_at?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          candidate_id?: string | null
+          subject?: string
+          from_email?: string
+          from_name?: string | null
+          to_email?: string
+          body_text?: string | null
+          body_html?: string | null
+          message_id?: string | null
+          in_reply_to?: string | null
+          thread_id?: string | null
+          direction?: string
+          sent_at?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_threads_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "sourcing_candidates"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       blog_posts: {
         Row: {
           author: string

@@ -22,6 +22,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as InterviewCopilotRouteImport } from './routes/interview-copilot'
+import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CustomersRouteImport } from './routes/customers'
@@ -122,6 +123,11 @@ const LoginRoute = LoginRouteImport.update({
 const InterviewCopilotRoute = InterviewCopilotRouteImport.update({
   id: '/interview-copilot',
   path: '/interview-copilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InboxRoute = InboxRouteImport.update({
+  id: '/inbox',
+  path: '/inbox',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
@@ -321,6 +327,7 @@ export interface FileRoutesByFullPath {
   '/customers': typeof CustomersRoute
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/inbox': typeof InboxRoute
   '/interview-copilot': typeof InterviewCopilotRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
@@ -372,6 +379,7 @@ export interface FileRoutesByTo {
   '/customers': typeof CustomersRoute
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/inbox': typeof InboxRoute
   '/interview-copilot': typeof InterviewCopilotRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
@@ -423,6 +431,7 @@ export interface FileRoutesById {
   '/customers': typeof CustomersRoute
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/inbox': typeof InboxRoute
   '/interview-copilot': typeof InterviewCopilotRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
@@ -476,6 +485,7 @@ export interface FileRouteTypes {
     | '/customers'
     | '/dashboard'
     | '/forgot-password'
+    | '/inbox'
     | '/interview-copilot'
     | '/login'
     | '/pricing'
@@ -527,6 +537,7 @@ export interface FileRouteTypes {
     | '/customers'
     | '/dashboard'
     | '/forgot-password'
+    | '/inbox'
     | '/interview-copilot'
     | '/login'
     | '/pricing'
@@ -577,6 +588,7 @@ export interface FileRouteTypes {
     | '/customers'
     | '/dashboard'
     | '/forgot-password'
+    | '/inbox'
     | '/interview-copilot'
     | '/login'
     | '/pricing'
@@ -629,6 +641,7 @@ export interface RootRouteChildren {
   CustomersRoute: typeof CustomersRoute
   DashboardRoute: typeof DashboardRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
+  InboxRoute: typeof InboxRoute
   InterviewCopilotRoute: typeof InterviewCopilotRoute
   LoginRoute: typeof LoginRoute
   PricingRoute: typeof PricingRoute
@@ -757,6 +770,13 @@ declare module '@tanstack/react-router' {
       path: '/interview-copilot'
       fullPath: '/interview-copilot'
       preLoaderRoute: typeof InterviewCopilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inbox': {
+      id: '/inbox'
+      path: '/inbox'
+      fullPath: '/inbox'
+      preLoaderRoute: typeof InboxRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forgot-password': {
@@ -1044,6 +1064,7 @@ const rootRouteChildren: RootRouteChildren = {
   CustomersRoute: CustomersRoute,
   DashboardRoute: DashboardRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
+  InboxRoute: InboxRoute,
   InterviewCopilotRoute: InterviewCopilotRoute,
   LoginRoute: LoginRoute,
   PricingRoute: PricingRoute,
