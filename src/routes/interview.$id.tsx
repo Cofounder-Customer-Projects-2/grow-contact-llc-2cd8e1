@@ -115,6 +115,7 @@ function LiveInterviewPage() {
   const transcriptEnd = useRef<HTMLDivElement>(null);
   const transcriptScroll = useRef<HTMLDivElement>(null);
   const completedRef = useRef(false);
+  const suggestDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const transcript = useMemo(() => events.filter((e) => e.kind === "transcript"), [events]);
   const suggestions = useMemo(() => events.filter((e) => e.kind === "suggestion"), [events]);
@@ -373,10 +374,19 @@ function LiveInterviewPage() {
     setBusy("finalize");
     try {
       const { data: { session: s } } = await supabase.auth.getSession();
-      const r = await finalizeScorecard({
-        data: { sessionId: id },
-        headers: s?.access_token ? { Authorization: `Bearer ${s.access_token}` } : undefined,
-      }) as { scorecard: ScorecardRow };
+      const res = await fetch("/api/interview/finalize", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(s?.access_token ? { Authorization: `Bearer ${s.access_token}` } : {}),
+        },
+        body: JSON.stringify({ sessionId: id }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({})) as { error?: string };
+        throw new Error(body.error ?? "Failed to generate scorecard");
+      }
+      const r = await res.json() as { scorecard: ScorecardRow };
       setScorecard(r.scorecard);
       toast.success("Scorecard generated");
       // Fire-and-forget: email the interviewer a recap.
@@ -712,7 +722,18 @@ function LiveInterviewPage() {
                 />
                 <Textarea
                   value={manualText}
-                  onChange={(e) => setManualText(e.target.value)}
+                  onChange={(e) => {
+                    setManualText(e.target.value);
+                    // Debounced live suggestions while typing (3 s)
+                    if (!completed && e.target.value.trim().length > 20) {
+                      if (suggestDebounceRef.current) clearTimeout(suggestDebounceRef.current);
+                      suggestDebounceRef.current = setTimeout(() => {
+                        callServer((opts) =>
+                          generateLiveSuggestionsFn({ ...opts, data: { sessionId: id, context: e.target.value } })
+                        ).catch((err) => console.warn("debounced suggest:", err));
+                      }, 3000);
+                    }
+                  }}
                   onKeyDown={(e) => {
                     if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
                       e.preventDefault();
