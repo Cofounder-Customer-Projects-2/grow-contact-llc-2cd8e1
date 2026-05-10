@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, X, LogOut, User as UserIcon, Shield, Video, Inbox } from "lucide-react";
+import { Menu, X, LogOut, User as UserIcon, Shield, Video, Inbox, TrendingUp, Mail, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -88,12 +88,12 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-0.5 overflow-x-auto md:flex lg:gap-1">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="rounded-md px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-white/5 hover:text-foreground"
+              className="rounded-md px-2 py-2 text-sm text-foreground/80 transition-colors hover:bg-white/5 hover:text-foreground lg:px-3"
               activeProps={{ className: "text-foreground bg-white/5" }}
             >
               {l.label}
@@ -151,6 +151,24 @@ export function Navbar() {
                   <Link to="/inbox" className="cursor-pointer">
                     <Inbox className="mr-2 h-4 w-4" />
                     Inbox
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/candidates" className="cursor-pointer">
+                    <TrendingUp className="mr-2 h-4 w-4" />
+                    Pipeline
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/outreach" className="cursor-pointer">
+                    <Mail className="mr-2 h-4 w-4" />
+                    Outreach
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/settings" className="cursor-pointer">
+                    <Settings className="mr-2 h-4 w-4" />
+                    Settings
                   </Link>
                 </DropdownMenuItem>
                 {profile?.isAdmin ? (
