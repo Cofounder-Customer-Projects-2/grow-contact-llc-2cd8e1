@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AuthProvider } from "@/contexts/AuthContext";
 import "../styles.css";
 import { Toaster } from "@/components/ui/sonner";
+import { CookieBanner } from "@/components/CookieBanner";
 
 function NotFoundComponent() {
   return (
@@ -39,6 +40,7 @@ function RootComponent() {
       <AuthProvider>
         <Outlet />
         <Toaster />
+        <CookieBanner />
       </AuthProvider>
     </QueryClientProvider>
   );
