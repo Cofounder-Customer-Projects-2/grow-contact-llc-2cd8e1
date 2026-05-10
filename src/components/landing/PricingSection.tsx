@@ -18,7 +18,7 @@ const plans = [
   },
   {
     name: "Growth",
-    price: "$2,000",
+    price: "$1,499",
     cadence: "/ month",
     description: "Replaces a senior recruiter at ~$180k / yr.",
     features: [
