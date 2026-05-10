@@ -475,6 +475,7 @@ export type Database = {
           created_at: string
           id: string
           name: string | null
+          notification_prefs: Json
           updated_at: string
           user_id: string
         }
@@ -483,6 +484,7 @@ export type Database = {
           created_at?: string
           id?: string
           name?: string | null
+          notification_prefs?: Json
           updated_at?: string
           user_id: string
         }
@@ -491,6 +493,7 @@ export type Database = {
           created_at?: string
           id?: string
           name?: string | null
+          notification_prefs?: Json
           updated_at?: string
           user_id?: string
         }
@@ -510,6 +513,7 @@ export type Database = {
           last_search_id: string | null
           location: string | null
           name: string
+          pipeline_stage: string
           profile_url: string
           signals: Json
           source: string
@@ -529,6 +533,7 @@ export type Database = {
           last_search_id?: string | null
           location?: string | null
           name: string
+          pipeline_stage?: string
           profile_url: string
           signals?: Json
           source: string
@@ -548,6 +553,7 @@ export type Database = {
           last_search_id?: string | null
           location?: string | null
           name?: string
+          pipeline_stage?: string
           profile_url?: string
           signals?: Json
           source?: string
