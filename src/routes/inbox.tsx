@@ -1,4 +1,5 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useEffect, useState } from "react";
 import { Navbar } from "@/components/landing/Navbar";
 import { Badge } from "@/components/ui/badge";
@@ -15,8 +16,16 @@ export const Route = createFileRoute("/inbox")({
       { name: "robots", content: "noindex" },
     ],
   }),
-  component: InboxPage,
+  component: InboxWrapper,
 });
+
+function InboxWrapper() {
+  return (
+    <ProtectedRoute>
+      <InboxPage />
+    </ProtectedRoute>
+  );
+}
 
 type EmailThread = {
   id: string;
@@ -34,16 +43,11 @@ type EmailThread = {
 type Filter = "all" | "inbound" | "outbound";
 
 function InboxPage() {
-  const { user, loading: authLoading } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
   const [threads, setThreads] = useState<EmailThread[]>([]);
   const [filter, setFilter] = useState<Filter>("all");
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<EmailThread | null>(null);
-
-  useEffect(() => {
-    if (!authLoading && !user) navigate({ to: "/login" });
-  }, [authLoading, user, navigate]);
 
   useEffect(() => {
     if (!user) return;
