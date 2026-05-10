@@ -82,7 +82,7 @@ const faqs = [
   },
   {
     q: "How does Grow compare to a senior recruiter?",
-    a: "A senior in-house recruiter in the US averages ~$180k/yr loaded. Growth is $2k/month — about a tenth of the cost — and works 24/7 across every role you have open.",
+    a: "A senior in-house recruiter in the US averages ~$180k/yr loaded. Growth is $1,499/mo — about a tenth of the cost — and works 24/7 across every role you have open.",
   },
   {
     q: "Do you support our ATS?",

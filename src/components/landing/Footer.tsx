@@ -77,12 +77,9 @@ export function Footer() {
                           {l.label}
                         </Link>
                       ) : (
-                        <a
-                          href="#"
-                          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                        >
+                        <span className="text-sm text-muted-foreground">
                           {l.label}
-                        </a>
+                        </span>
                       )}
                     </li>
                   ))}
