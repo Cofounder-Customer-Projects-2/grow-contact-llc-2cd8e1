@@ -14,12 +14,14 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SourcingRouteImport } from './routes/sourcing'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as InterviewCopilotRouteImport } from './routes/interview-copilot'
 import { Route as InboxRouteImport } from './routes/inbox'
@@ -29,6 +31,7 @@ import { Route as CustomersRouteImport } from './routes/customers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ChangelogRouteImport } from './routes/changelog'
 import { Route as CareersRouteImport } from './routes/careers'
+import { Route as CandidatesRouteImport } from './routes/candidates'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -85,6 +88,11 @@ const SignupRoute = SignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SecurityRoute = SecurityRouteImport.update({
   id: '/security',
   path: '/security',
@@ -113,6 +121,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OutreachRoute = OutreachRouteImport.update({
+  id: '/outreach',
+  path: '/outreach',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -158,6 +171,11 @@ const ChangelogRoute = ChangelogRouteImport.update({
 const CareersRoute = CareersRouteImport.update({
   id: '/careers',
   path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CandidatesRoute = CandidatesRouteImport.update({
+  id: '/candidates',
+  path: '/candidates',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccountRoute = AccountRouteImport.update({
@@ -321,6 +339,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
+  '/candidates': typeof CandidatesRoute
   '/careers': typeof CareersRoute
   '/changelog': typeof ChangelogRoute
   '/contact': typeof ContactRoute
@@ -330,12 +349,14 @@ export interface FileRoutesByFullPath {
   '/inbox': typeof InboxRoute
   '/interview-copilot': typeof InterviewCopilotRoute
   '/login': typeof LoginRoute
+  '/outreach': typeof OutreachRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/security': typeof SecurityRoute
+  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sourcing': typeof SourcingRouteWithChildren
@@ -373,6 +394,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
+  '/candidates': typeof CandidatesRoute
   '/careers': typeof CareersRoute
   '/changelog': typeof ChangelogRoute
   '/contact': typeof ContactRoute
@@ -382,12 +404,14 @@ export interface FileRoutesByTo {
   '/inbox': typeof InboxRoute
   '/interview-copilot': typeof InterviewCopilotRoute
   '/login': typeof LoginRoute
+  '/outreach': typeof OutreachRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/security': typeof SecurityRoute
+  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -425,6 +449,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
+  '/candidates': typeof CandidatesRoute
   '/careers': typeof CareersRoute
   '/changelog': typeof ChangelogRoute
   '/contact': typeof ContactRoute
@@ -434,12 +459,14 @@ export interface FileRoutesById {
   '/inbox': typeof InboxRoute
   '/interview-copilot': typeof InterviewCopilotRoute
   '/login': typeof LoginRoute
+  '/outreach': typeof OutreachRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/security': typeof SecurityRoute
+  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sourcing': typeof SourcingRouteWithChildren
@@ -479,6 +506,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/account'
+    | '/candidates'
     | '/careers'
     | '/changelog'
     | '/contact'
@@ -488,12 +516,14 @@ export interface FileRouteTypes {
     | '/inbox'
     | '/interview-copilot'
     | '/login'
+    | '/outreach'
     | '/pricing'
     | '/privacy'
     | '/reset-password'
     | '/robots.txt'
     | '/rss.xml'
     | '/security'
+    | '/settings'
     | '/signup'
     | '/sitemap.xml'
     | '/sourcing'
@@ -531,6 +561,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/account'
+    | '/candidates'
     | '/careers'
     | '/changelog'
     | '/contact'
@@ -540,12 +571,14 @@ export interface FileRouteTypes {
     | '/inbox'
     | '/interview-copilot'
     | '/login'
+    | '/outreach'
     | '/pricing'
     | '/privacy'
     | '/reset-password'
     | '/robots.txt'
     | '/rss.xml'
     | '/security'
+    | '/settings'
     | '/signup'
     | '/sitemap.xml'
     | '/terms'
@@ -582,6 +615,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/account'
+    | '/candidates'
     | '/careers'
     | '/changelog'
     | '/contact'
@@ -591,12 +625,14 @@ export interface FileRouteTypes {
     | '/inbox'
     | '/interview-copilot'
     | '/login'
+    | '/outreach'
     | '/pricing'
     | '/privacy'
     | '/reset-password'
     | '/robots.txt'
     | '/rss.xml'
     | '/security'
+    | '/settings'
     | '/signup'
     | '/sitemap.xml'
     | '/sourcing'
@@ -635,6 +671,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AccountRoute: typeof AccountRoute
+  CandidatesRoute: typeof CandidatesRoute
   CareersRoute: typeof CareersRoute
   ChangelogRoute: typeof ChangelogRoute
   ContactRoute: typeof ContactRoute
@@ -644,12 +681,14 @@ export interface RootRouteChildren {
   InboxRoute: typeof InboxRoute
   InterviewCopilotRoute: typeof InterviewCopilotRoute
   LoginRoute: typeof LoginRoute
+  OutreachRoute: typeof OutreachRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   RssDotxmlRoute: typeof RssDotxmlRoute
   SecurityRoute: typeof SecurityRoute
+  SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SourcingRoute: typeof SourcingRouteWithChildren
@@ -716,6 +755,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/security': {
       id: '/security'
       path: '/security'
@@ -756,6 +802,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/outreach': {
+      id: '/outreach'
+      path: '/outreach'
+      fullPath: '/outreach'
+      preLoaderRoute: typeof OutreachRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -819,6 +872,13 @@ declare module '@tanstack/react-router' {
       path: '/careers'
       fullPath: '/careers'
       preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/candidates': {
+      id: '/candidates'
+      path: '/candidates'
+      fullPath: '/candidates'
+      preLoaderRoute: typeof CandidatesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/account': {
@@ -1058,6 +1118,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AccountRoute: AccountRoute,
+  CandidatesRoute: CandidatesRoute,
   CareersRoute: CareersRoute,
   ChangelogRoute: ChangelogRoute,
   ContactRoute: ContactRoute,
@@ -1067,12 +1128,14 @@ const rootRouteChildren: RootRouteChildren = {
   InboxRoute: InboxRoute,
   InterviewCopilotRoute: InterviewCopilotRoute,
   LoginRoute: LoginRoute,
+  OutreachRoute: OutreachRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   RssDotxmlRoute: RssDotxmlRoute,
   SecurityRoute: SecurityRoute,
+  SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SourcingRoute: SourcingRouteWithChildren,
