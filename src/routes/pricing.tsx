@@ -14,7 +14,7 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Transparent monthly pricing for Grow's talent operating system. Starter, Growth, and Scale plans. No per-hire fees.",
+          "Transparent monthly pricing for Grow's talent operating system. Starter, Growth, and Enterprise plans. No per-hire fees.",
       },
       { property: "og:title", content: "Pricing — Grow" },
       {
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/pricing")({
   component: PricingPage,
 });
 
-type Tier = "Starter" | "Growth" | "Scale";
+type Tier = "Starter" | "Growth" | "Enterprise";
 
 const compareGroups: {
   group: string;
@@ -36,37 +36,37 @@ const compareGroups: {
   {
     group: "Sourcing AI",
     rows: [
-      { feature: "Candidates surfaced / month", values: { Starter: "200", Growth: "Unlimited", Scale: "Unlimited" } },
-      { feature: "Retention-aware ranking", values: { Starter: false, Growth: true, Scale: true } },
-      { feature: "Outbound sequences", values: { Starter: "Single-step", Growth: "Branching", Scale: "Branching + A/B" } },
-      { feature: "Custom sourcing models", values: { Starter: false, Growth: false, Scale: true } },
+      { feature: "Candidates surfaced / month", values: { Starter: "200", Growth: "Unlimited", Enterprise: "Unlimited" } },
+      { feature: "Retention-aware ranking", values: { Starter: false, Growth: true, Enterprise: true } },
+      { feature: "Outbound sequences", values: { Starter: "Single-step", Growth: "Branching", Enterprise: "Branching + A/B" } },
+      { feature: "Custom sourcing models", values: { Starter: false, Growth: false, Enterprise: true } },
     ],
   },
   {
     group: "Interview Copilot",
     rows: [
-      { feature: "Live transcription", values: { Starter: false, Growth: true, Scale: true } },
-      { feature: "Real-time scorecards", values: { Starter: false, Growth: true, Scale: true } },
-      { feature: "Calibration drift alerts", values: { Starter: false, Growth: true, Scale: true } },
-      { feature: "Panel debrief synthesis", values: { Starter: false, Growth: false, Scale: true } },
+      { feature: "Live transcription", values: { Starter: false, Growth: true, Enterprise: true } },
+      { feature: "Real-time scorecards", values: { Starter: false, Growth: true, Enterprise: true } },
+      { feature: "Calibration drift alerts", values: { Starter: false, Growth: true, Enterprise: true } },
+      { feature: "Panel debrief synthesis", values: { Starter: false, Growth: false, Enterprise: true } },
     ],
   },
   {
     group: "Platform & integrations",
     rows: [
-      { feature: "ATS sync (Greenhouse, Ashby, Lever)", values: { Starter: false, Growth: true, Scale: true } },
-      { feature: "SAML SSO + SCIM", values: { Starter: false, Growth: false, Scale: true } },
-      { feature: "Audit logs & data residency", values: { Starter: false, Growth: false, Scale: true } },
-      { feature: "Customer-managed keys", values: { Starter: false, Growth: false, Scale: true } },
+      { feature: "ATS sync (Greenhouse, Ashby, Lever)", values: { Starter: false, Growth: true, Enterprise: true } },
+      { feature: "SAML SSO + SCIM", values: { Starter: false, Growth: false, Enterprise: true } },
+      { feature: "Audit logs & data residency", values: { Starter: false, Growth: false, Enterprise: true } },
+      { feature: "Customer-managed keys", values: { Starter: false, Growth: false, Enterprise: true } },
     ],
   },
   {
     group: "Support",
     rows: [
-      { feature: "Email support", values: { Starter: true, Growth: true, Scale: true } },
-      { feature: "Priority Slack channel", values: { Starter: false, Growth: true, Scale: true } },
-      { feature: "Dedicated success engineer", values: { Starter: false, Growth: false, Scale: true } },
-      { feature: "99.9% uptime SLA", values: { Starter: false, Growth: false, Scale: true } },
+      { feature: "Email support", values: { Starter: true, Growth: true, Enterprise: true } },
+      { feature: "Priority Slack channel", values: { Starter: false, Growth: true, Enterprise: true } },
+      { feature: "Dedicated success engineer", values: { Starter: false, Growth: false, Enterprise: true } },
+      { feature: "99.9% uptime SLA", values: { Starter: false, Growth: false, Enterprise: true } },
     ],
   },
 ];
@@ -86,7 +86,7 @@ const faqs = [
   },
   {
     q: "Do you support our ATS?",
-    a: "Greenhouse, Ashby, and Lever sync bi-directionally on Growth and Scale. Workday, SmartRecruiters and Teamtailor are available on Scale. Talk to us about anything else.",
+    a: "Greenhouse, Ashby, and Lever sync bi-directionally on Growth and Enterprise. Workday, SmartRecruiters and Teamtailor are available on Enterprise. Talk to us about anything else.",
   },
   {
     q: "What about data and security?",
@@ -100,7 +100,7 @@ const faqs = [
 
 const quotes = [
   {
-    body: "We replaced a $180k recruiter and two contractors with Grow Growth. The math wasn't even close.",
+    body: "We replaced a $180k recruiter and two contractors with Grow Growth plan. The math wasn't even close.",
     author: "Maya Okafor",
     role: "VP People, Vortex",
   },
@@ -110,7 +110,7 @@ const quotes = [
     role: "Head of Talent, Nimbus",
   },
   {
-    body: "Scale was the first plan we've seen that actually behaves like enterprise software — SSO, audit logs, the whole stack.",
+    body: "Enterprise was the first plan we've seen that actually behaves like enterprise software — SSO, audit logs, the whole stack.",
     author: "Priya Shah",
     role: "Co-founder & CTO, Prysma",
   },
@@ -138,7 +138,7 @@ function PricingPage() {
               <div>Feature</div>
               <div className="text-center">Starter</div>
               <div className="text-center">Growth</div>
-              <div className="text-center">Scale</div>
+              <div className="text-center">Enterprise</div>
             </div>
 
             {compareGroups.map((g) => (
@@ -154,7 +154,7 @@ function PricingPage() {
                     <div className="col-span-2 font-medium text-foreground md:col-span-1">
                       {row.feature}
                     </div>
-                    {(["Starter", "Growth", "Scale"] as Tier[]).map((tier) => (
+                    {(["Starter", "Growth", "Enterprise"] as Tier[]).map((tier) => (
                       <div
                         key={tier}
                         className="flex items-center gap-2 md:justify-center"
