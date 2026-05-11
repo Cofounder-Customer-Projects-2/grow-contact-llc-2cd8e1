@@ -32,10 +32,10 @@ const plans = [
     highlighted: true,
   },
   {
-    name: "Scale",
+    name: "Enterprise",
     price: "Custom",
     cadence: "",
-    description: "For multi-team orgs with global hiring.",
+    description: "For high-volume teams with custom security and compliance needs.",
     features: [
       "Everything in Growth",
       "Custom models on your pipeline",
