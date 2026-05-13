@@ -301,7 +301,7 @@ export async function outreachStats(): Promise<{
   if (all.error) throw all.error;
   if (last7.error) throw last7.error;
 
-  const rows = all.data ?? [];
+  const rows: Array<{ status: string | null }> = all.data ?? [];
   return {
     total: rows.length,
     sent: rows.filter((r) => r.status === "sent").length,

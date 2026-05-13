@@ -26,7 +26,8 @@ export async function getPublishedPosts(): Promise<{
 
   if (error) throw error;
 
-  const posts = (data ?? []).map((p) => ({
+  type Row = { slug: string; title: string; excerpt: string | null; category: string | null; published_at: string | null; read_time: string | null; author: string | null; author_role: string | null };
+  const posts = ((data ?? []) as Row[]).map((p) => ({
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt,

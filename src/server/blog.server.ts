@@ -61,7 +61,7 @@ export async function generateBlogDraft(): Promise<{
     .select("title")
     .order("created_at", { ascending: false })
     .limit(20);
-  const recentTitles = (recent ?? []).map((r) => r.title as string);
+  const recentTitles = ((recent ?? []) as Array<{ title: string | null }>).map((r) => r.title as string);
   const theme = pickTheme(recentTitles);
 
   const system = `You are a senior editor at Grow, a talent operating system used by high-growth tech companies. You write the way a confident operator writes: declarative, specific, allergic to clichés. You never use words like "leverage", "synergy", "robust", "delve", or "in today's fast-paced world". You favor concrete numbers, named anti-patterns, and short paragraphs. Audience: heads of talent, founders, hiring managers at Series B–public companies.`;
@@ -200,7 +200,8 @@ export async function fetchPublishedPosts(): Promise<PublicPost[]> {
     .order("published_at", { ascending: false })
     .limit(200);
   if (error) return [];
-  return (data ?? []).map((p) => ({
+  type RawPost = { slug: string; title: string; excerpt: string | null; category: string | null; author: string | null; author_role: string | null; body: string | null; read_time: string | null; published_at: string | null };
+  return ((data ?? []) as RawPost[]).map((p) => ({
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt,
