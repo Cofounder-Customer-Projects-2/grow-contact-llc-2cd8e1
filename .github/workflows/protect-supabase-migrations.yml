@@ -8,7 +8,7 @@ on:
 
 jobs:
   check-migration-integrity:
-    runs-on: ubuntu-latest
+    runs-on: ["self-hosted", "linux", "superoptimizers", "check-migration-integrity"]
 
     steps:
       - name: Checkout code
