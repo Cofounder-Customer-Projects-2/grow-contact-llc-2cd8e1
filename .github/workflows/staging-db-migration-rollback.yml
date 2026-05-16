@@ -16,7 +16,7 @@ concurrency:
 jobs:
   rollback:
     if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
+    runs-on: ["self-hosted", "linux", "superoptimizers", "staging-db-migration-rollback"]
     permissions:
       id-token: write
       pull-requests: read
