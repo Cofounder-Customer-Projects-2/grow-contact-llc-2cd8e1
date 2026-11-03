@@ -118,7 +118,9 @@ export const Route = createFileRoute("/blog/$slug")({
         <h1 className="text-3xl font-semibold tracking-tight text-foreground">
           Something went wrong
         </h1>
-        <p className="mt-3 text-muted-foreground">{error.message}</p>
+        <p className="mt-3 text-muted-foreground">
+          {error instanceof Error ? error.message : String(error)}
+        </p>
       </section>
       <Footer />
     </>
